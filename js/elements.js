@@ -1,5 +1,7 @@
+import { renderLayers } from "./layers.js";
 import { attachSelectionToElement } from "./selection.js";
 import { state } from "./state.js";
+
 export function initElements() {
   const rectBtn = document.querySelector("#addRectBtn");
   const textBtn = document.querySelector("#addTextBtn");
@@ -8,10 +10,13 @@ export function initElements() {
   textBtn.addEventListener("click", createText);
 }
 
+
+
 function createRectangle() {
   const element = {
-    id: "el_" + Date.now(),
+    id: crypto.randomUUID(),
     type: "rectangle",
+    name: `rectangle ${state.elements.length + 1}`,
     x: 50,
     y: 50,
     width: 100,
@@ -20,16 +25,20 @@ function createRectangle() {
     bgColor: "#4ade80",
     text: "",
     zIndex: state.zIndexCounter++,
+    locked: false,
+    hidden:false
   };
 
   state.elements.push(element);
   drawElement(element);
+  renderLayers();
 }
 
 function createText() {
   const element = {
-    id: "el_" + Date.now(),
+    id: crypto.randomUUID(),
     type: "text",
+    name:`text ${state.elements.length + 1}`,
     x: 180,
     y: 180,
     width: 50,
@@ -38,13 +47,17 @@ function createText() {
     bgColor: "transparent",
     text: "Add text",
     zIndex: state.zIndexCounter++,
+    locked: false,
+    hidden:false
   };
 
   state.elements.push(element);
   drawElement(element);
+  renderLayers();
 }
 
 function drawElement(el) {
+  // console.log(el);
   const div = document.createElement("div");
   div.className = "element";
 
@@ -60,11 +73,13 @@ function drawElement(el) {
 
   document.getElementById("canvas").appendChild(div);
 
-  if (el.type === "text") {  // text create krne ke liye check kara ki element ka type kya aa raha he text/rectangle! agar text he to hi ye if chalega
+  if (el.type === "text") {
+    // text create krne ke liye check kara ki element ka type kya aa raha he text/rectangle! agar text he to hi ye if chalega
     // console.log("hello");
-
-    
-    div.textContent = el.text;
+    const content = document.createElement("div");
+    content.className = "text-content";
+    content.textContent = el.text;
+    div.appendChild(content);
     div.style.background = el.bgColor;
     div.style.border = "1px solid #555555";
   }

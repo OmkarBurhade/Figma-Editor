@@ -32,7 +32,7 @@ function startResize(e) {
 
   resizing = true;
   currentHandle = e.target.dataset.pos; // jis bhi point pr mousedown krta hu uska data-pos ki value mil ja rahi he 🔥
-  console.log(currentHandle);
+  // console.log(currentHandle);
   currentEl = e.target.parentElement; // position points pr click krne pr parent yani ki element mil raha he
   // console.log(currentEl)
 

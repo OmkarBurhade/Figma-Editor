@@ -8,12 +8,15 @@ const textBox = document.getElementById("text-prop-box");
 
 export function updatePropertiesPanel(el) {
   if (!el) return;
+  const id = el.dataset.id;
+  // element ka sara data elData me store kia
+  const elData = state.elements.find((e) => e.id === id);
 
-  const elData = state.elements.find((e) => {
-    // element ka sara data elData me store kia
+  if (!elData) {
+    console.warn("Element data not found for id:", id);
+    return;
+  }
 
-    return e.id === el.dataset.id;
-  });
   // console.log(widthInput.value)
   widthInput.value = elData.width; // input width ki value element me set krne ke liye
   heightInput.value = elData.height;
@@ -21,63 +24,62 @@ export function updatePropertiesPanel(el) {
 
   if (elData.type === "text") {
     textBox.style.display = "block";
-    textBox.value = elData.text;
-  }else{
-    textBox.style.display = 'none'
+    textInput.value = elData.text || "";
+  } else {
+    textBox.style.display = "none";
   }
 }
 
+widthInput.addEventListener("input", () => updateSize("width"));
+heightInput.addEventListener("input", () => updateSize("height"));
+colorInput.addEventListener("input", updateColor);
+textInput.addEventListener("input", updateText);
 
-widthInput.addEventListener('input', ()=>updateSize('width'));
-heightInput.addEventListener('input', ()=>updateSize('height'));
-colorInput.addEventListener('input', updateColor);
-textInput.addEventListener('input', updateText);
+function updateSize(type) {
+  if (!state.selectedId) return; // check kara ki id mil rahi he ki nahi!
 
+  const element = document.querySelector(`[data-id="${state.selectedId}"]`); // element ko select kiya id state id ki madat se!
 
-function updateSize(type){
-    
-    if(!state.selectedId) return // check kara ki id mil rahi he ki nahi!
+  const val = type === "width" ? widthInput.value : heightInput.value;
 
-    const element = document.querySelector(`[data-id=${state.selectedId}]`) // element ko select kiya id state id ki madat se!
-   
-    const val = type === 'width' ? widthInput.value : heightInput.value;
-    
-    // element.style.type = val + 'px' ye line ko yesa kyu likha he kyuki agar me element.style krta hu to muze yek array milta he or me array ki andar ki value ko print krna chau to directly ese bhi likh sakta hu element.style[type]
-    // console.log(element.style[type]);
-    
-    element.style[type] = val + 'px' 
+  // element.style.type = val + 'px' ye line ko yesa kyu likha he kyuki agar me element.style krta hu to muze yek array milta he or me array ki andar ki value ko print krna chau to directly ese bhi likh sakta hu element.style[type]
+  // console.log(element.style[type]);
 
-    const elData = state.elements.find(e=>e.id === state.selectedId);
-    
-    elData[type] = Number(val) //exact width or height input se calculate krneke liye
-    
+  element.style[type] = val + "px";
+
+  const elData = state.elements.find((e) => e.id === state.selectedId);
+
+  elData[type] = Number(val); //exact width or height input se calculate krneke liye
 }
 
+function updateColor() {
+  if (!state.selectedId) return;
+  const element = document.querySelector(`[data-id="${state.selectedId}"]`);
 
-function updateColor(){
-    if(!state.selectedId) return
-    const element = document.querySelector(`[data-id=${state.selectedId}]`)
+  element.style.background = colorInput.value; // box ka color set krdiya
+  // console.log(colorInput.value);
 
-    element.style.background = colorInput.value // box ka color set krdiya
-    // console.log(colorInput.value);
-
-    const elData = state.elements.find(e=>e.id===state.selectedId);
-    console.log(elData)
-    elData.bgColor = colorInput.value
-    
+  const elData = state.elements.find((e) => e.id === state.selectedId);
+  console.log(elData);
+  elData.bgColor = colorInput.value;
 }
 
-function updateText(){
-   if(!state.selectedId) return
-   const element = document.querySelector(`[data-id=${state.selectedId}`);
+function updateText() {
+  if (!state.selectedId) return;
 
-   element.innerText = textInput.value
+  const element = document.querySelector(`[data-id="${state.selectedId}"]`);
+  if (!element) return;
 
-   const elData = state.elements.find(e=>e.id === state.selectedId);
-   elData.text = textInput
+  const textDiv = element.querySelector(".text-content");
+  if (!textDiv) return;
+  
+  textDiv.innerText = textInput.value;
+
+  const elData = state.elements.find((e) => e.id === state.selectedId);
+  elData.text = textInput.value;
 }
 
-export function removeInputValue(){
-    widthInput.value = 0
-    heightInput.value = 0
+export function removeInputValue() {
+  widthInput.value = 0;
+  heightInput.value = 0;
 }
