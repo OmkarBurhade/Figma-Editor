@@ -5,7 +5,6 @@ let offsetX = 0;
 let offsetY = 0;
 let currentEl = null;
 
-
 export function initDrag(canvas) {
   document.addEventListener("mousedown", (e) => {
     const item = document.querySelectorAll(".text-content");
@@ -16,6 +15,9 @@ export function initDrag(canvas) {
 
     const id = target.dataset.id;
     // console.log(id);
+
+    const elData = state.elements.find((e) => e.id === id);
+    if (elData?.locked) return;
 
     if (state.selectedId !== id) return;
 
@@ -51,6 +53,12 @@ export function initDrag(canvas) {
 
     currentEl.style.left = newX + "px";
     currentEl.style.top = newY + "px";
+
+    const elData = state.elements.find((e) => e.id === currentEl.dataset.id);
+    if (elData) {
+      elData.x = newX;
+      elData.y = newY;
+    }
   });
 
   document.addEventListener("mouseup", () => {

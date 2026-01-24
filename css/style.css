@@ -2,18 +2,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family:
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    Roboto,
-    Oxygen,
-    Ubuntu,
-    Cantarell,
-    "Open Sans",
-    "Helvetica Neue",
-    sans-serif;
+  font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
 html,
@@ -22,6 +11,13 @@ body {
   height: 100%;
 }
 :root {
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  /* flex-wrap: wrap; */
+  gap: 4px;
 }
 
 #toolbar {
@@ -52,7 +48,7 @@ body {
 
 #layersPanel,
 #propertiesPanel {
-  width: 200px;
+  width: 250px;
   background-color: #f0f0f0;
   padding: 10px;
 }
@@ -67,9 +63,11 @@ body {
 .element {
   cursor: pointer;
 }
+
 .element::selection {
   background-color: #c7c7c7;
 }
+
 .element.selected {
   outline: 2px solid #2563ed;
   outline-offset: 2px;
@@ -148,43 +146,174 @@ h3 {
 }
 
 #layers-list {
+  border-radius: 6px;
+  background: #e8e8e8;
   padding: 5px;
 }
 
-/* .layer-item {
-  padding: 6px 8px;
-  cursor: pointer;
-  border-radius: 4px;
-  margin-bottom: 4px;
-  background: #eee;
-  font-size: 13px;
-} */
+.layer-item {
+  width: 60%;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
 
 .layer-row.active {
-  background: #5ab35a;
-  color: white;
   border: 1px solid #c4c4c4;
 }
 
 .layer-row {
+  position: relative;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  /* gap: 4px; */
   padding: 6px 8px;
   cursor: pointer;
   border-radius: 4px;
   margin-bottom: 4px;
-  background: #eee;
+  background: #fff;
   font-size: 13px;
 }
 .layer-row:hover {
-  background: #ddd;
+  background: #f9f9f9;
   color: #222222;
 }
 
+.layer-rename-input {
+  width: 60%;
+  outline: 1px solid #dadada;
+  border: none;
+  border-radius: 2px;
+  padding: 4px 6px;
+}
+
 .delete-layer-btn {
+  margin-right: 0px;
   background: none;
   border: none;
   cursor: pointer;
   color: red;
   font-weight: 500;
+  padding: 12px;
+  width: 14px;
+  height: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.5ms linear;
+}
+
+.delete-layer-btn:hover {
+  background: #f1f1f1;
+}
+
+.layer-hide-btn {
+  margin-right: 0px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: red;
+  font-weight: 500;
+  padding: 12px;
+  width: 14px;
+  height: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.5ms linear;
+}
+
+.layer-hide-btn:hover {
+  background: #f1f1f1;
+}
+
+.layer-lock-btn {
+  margin-right: 15px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: red;
+  font-weight: 500;
+  padding: 12px;
+  width: 14px;
+  height: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.5ms linear;
+}
+
+.layer-lock-btn:hover {
+  background: #f1f1f1;
+}
+
+.layer-move-btn {
+  cursor: pointer;
+  font-size: 12px;
+  position: absolute;
+  right: 1%;
+  bottom: 2px;
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+.layer-move-btn:nth-child(2) {
+  cursor: pointer;
+  font-size: 12px;
+  position: absolute;
+  top: -14px;
+  right: 1%;
+  padding: 0;
+  border: none;
+  background: transparent;
+}
+
+.rotate-handle {
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 12px;
+  background: #4f46e5;
+  border-radius: 50%;
+  cursor: grab;
+  border: 2px solid white;
+  z-index: 10;
+}
+
+
+.save-load-wraper{
+  position: absolute;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+  border-radius: 8px;
+  background-color: #ffffff5e;
+  border: 1px solid #f1f1f1;
+  right: 280px;
+  top: 10px;
+  z-index: 999999999999999999999999;
+}
+
+.save-load-wraper button{
+  padding: 6px 14px;
+  border: none;
+  border-radius: 4px;
+  background-color: rgb(12, 201, 56);
+  font-size: 12px;
+  color: #fff;
+  font-weight: 500;
+}
+.save-load-wraper button:nth-child(2){
+  border: 1px solid #555555;
+  background-color: #fff;
+  color: #111;
 }

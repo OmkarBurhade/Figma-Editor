@@ -1,6 +1,7 @@
 import { state } from "./state.js";
 import { selectElement } from "./selection.js";
 import { deleteSelectedElement } from "./delete.js";
+import { moveLayer } from "./reorder.js";
 
 let isRenaming = false;
 let clickTimer = null;
@@ -49,9 +50,8 @@ export function renderLayers() {
       row.classList.add("active");
     }
 
-    // item.onclick = () => {
-    //   selectElement(el.id);
-    // };
+    if (el.locked) row.classList.add("locked");
+    if (el.hidden) row.classList.add("hidden");
 
     // yaha delete btn add kiya
     const delBtn = document.createElement("button");
@@ -64,18 +64,56 @@ export function renderLayers() {
       deleteSelectedElement();
     });
 
-    // row.addEventListener("click", () => {
-    //   if (isRenaming) return;
-    //   selectElement(el.id);
-    // });
+
+    const upBtn = document.createElement('button')
+    upBtn.innerText = '🔼'
+    upBtn.className = 'layer-move-btn'
+
+    upBtn.onclick = (e)=>{
+      e.stopPropagation()
+      selectElement(el.id)
+      moveLayer('up');
+    }
+
+    const downBtn = document.createElement('button')
+    downBtn.innerText = '🔽'
+    downBtn.className = 'layer-move-btn'
+
+    downBtn.onclick = (e)=>{
+      e.stopPropagation()
+      selectElement(el.id)
+      moveLayer('down');
+    }
+
+
+    // hide show lock unlock
+
+    const hideBtn = document.createElement("button");
+    hideBtn.innerText = el.hidden ? "🫣" : "👁️";
+    hideBtn.className = "layer-hide-btn";
+
+    hideBtn.onclick = (e) => {
+      e.stopPropagation();
+      toggleHide(el.id);
+    };
+
+    const lockBtn = document.createElement("button");
+    lockBtn.innerText = el.locked ? "🔒" : "🔓";
+    lockBtn.className = "layer-lock-btn";
+
+    lockBtn.onclick = (e) => {
+      e.stopPropagation();
+      toggleLock(el.id);
+    };
 
     row.appendChild(item);
+    row.appendChild(upBtn);
+    row.appendChild(downBtn);
     row.appendChild(delBtn);
+    row.appendChild(hideBtn);
+    row.appendChild(lockBtn);
     layersList.appendChild(row);
     // layersList.appendChild(item)
-
-    
-
   });
 }
 function enableRename(layer, el) {
@@ -109,4 +147,27 @@ function enableRename(layer, el) {
       renderLayers();
     }
   });
+}
+
+function toggleHide(id) {
+  const elData = state.elements.find((e) => e.id === id);
+  if (!elData) return;
+
+  elData.hidden = !elData.hidden;
+
+  const dom = document.querySelector(`[data-id="${id}"]`);
+  if (dom) {
+    dom.style.display = elData.hidden ? "none" : "block";
+  }
+
+  renderLayers();
+}
+
+function toggleLock(id) {
+  const elData = state.elements.find((e) => e.id === id);
+  if (!elData) return;
+
+  elData.locked = !elData.locked;
+
+  renderLayers();
 }

@@ -1,11 +1,8 @@
 import { renderLayers } from "./layers.js";
 import { removeInputValue, updatePropertiesPanel } from "./properties.js";
 import { addResizeHandles, removeResizHandles } from "./resize.js";
+import { addRotateHandle, removeRotateHandles } from "./rotate.js";
 import { state } from "./state.js";
-
-
-
-
 
 export function initSelection(canvas) {
   canvas.addEventListener("click", () => {
@@ -36,6 +33,9 @@ export function attachSelectionToElement(div, id) {
 export function selectElement(id) {
   clearSelection();
 
+  const elData = state.elements.find((e) => e.id === id);
+  if (elData?.locked) return;
+
   // console.log(state.selectedId = id) // id mil gai 😎
   state.selectedId = id;
   const el = document.querySelector(`[data-id="${id}"]`);
@@ -54,6 +54,7 @@ export function selectElement(id) {
   addResizeHandles(el); // resize krne ke liye addResizeHandles() fn ko element pass kr diya
   updatePropertiesPanel(el); //properties update krne ke liye updatePropertiesPanel() fn ko element de diya
   renderLayers();
+  addRotateHandle(el)
 }
 
 function clearSelection() {
@@ -65,20 +66,19 @@ function clearSelection() {
   });
 
   document.querySelectorAll(".element").forEach((el) => {
-   
     el.style.border = "none";
   });
 
   const item = document.querySelectorAll(".text-content");
-  
+
   item.forEach((el) => {
     el.classList.remove("selected");
     el.style.cursor = "default";
   });
-  
 
   removeInputValue();
-  removeResizHandles(); // resize ponts ko remove krne ke liye ye fn ha pr call kiya
+  removeResizHandles(); // resize points ko remove krne ke liye ye fn ha pr call kiya
+  removeRotateHandles(); // rotate points ko remove krne ke liye ye fn ha pr call kiya
 }
 
 function enableTextEdit(elementDiv) {

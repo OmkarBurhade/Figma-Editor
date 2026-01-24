@@ -5,7 +5,7 @@ const heightInput = document.getElementById("prop-height");
 const colorInput = document.getElementById("prop-color");
 const textInput = document.getElementById("prop-text");
 const textBox = document.getElementById("text-prop-box");
-
+const rotationInput = document.getElementById("prop-rotation");
 export function updatePropertiesPanel(el) {
   if (!el) return;
   const id = el.dataset.id;
@@ -28,12 +28,19 @@ export function updatePropertiesPanel(el) {
   } else {
     textBox.style.display = "none";
   }
+
+  // rotaion 
+
+  rotationInput.value = elData.rotation || 0
+
 }
 
 widthInput.addEventListener("input", () => updateSize("width"));
 heightInput.addEventListener("input", () => updateSize("height"));
 colorInput.addEventListener("input", updateColor);
 textInput.addEventListener("input", updateText);
+rotationInput.addEventListener('input', updateRotaion)
+
 
 function updateSize(type) {
   if (!state.selectedId) return; // check kara ki id mil rahi he ki nahi!
@@ -72,14 +79,29 @@ function updateText() {
 
   const textDiv = element.querySelector(".text-content");
   if (!textDiv) return;
-  
+
   textDiv.innerText = textInput.value;
 
   const elData = state.elements.find((e) => e.id === state.selectedId);
   elData.text = textInput.value;
 }
 
+function updateRotaion(){
+  if(!state.selectedId) return;
+
+  const element = document.querySelector(`[data-id='${state.selectedId}']`)
+
+  const val = Number(rotationInput.value) || 0;
+
+  element.style.transform = `rotate(${val}deg)`
+
+  const elData = state.elements.find(e=>e.id === state.selectedId);
+  elData.rotation = val
+
+}
+
 export function removeInputValue() {
   widthInput.value = 0;
   heightInput.value = 0;
+  rotationInput.value = 0;
 }

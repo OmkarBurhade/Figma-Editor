@@ -1,3 +1,4 @@
+
 import { renderLayers } from "./layers.js";
 import { attachSelectionToElement } from "./selection.js";
 import { state } from "./state.js";
@@ -56,7 +57,7 @@ function createText() {
   renderLayers();
 }
 
-function drawElement(el) {
+export function drawElement(el) {
   // console.log(el);
   const div = document.createElement("div");
   div.className = "element";
@@ -70,6 +71,11 @@ function drawElement(el) {
   div.style.height = el.height + "px";
   div.style.background = el.bgColor;
   div.style.zIndex = el.zIndex;
+  div.style.transform =  `rotate(${el.rotation}deg)`;
+
+   if (el.hidden) { // check kr raha he ki element render hone se pehele visible tha ki nahi agar hidden tha to hidden hi rahega 
+    div.style.display = "none";
+  }
 
   document.getElementById("canvas").appendChild(div);
 
@@ -85,4 +91,13 @@ function drawElement(el) {
   }
 
   attachSelectionToElement(div, el.id);
+}
+
+export function renderElements(){
+  const canvas = document.getElementById('canvas');
+  canvas.innerHTML = '';
+
+  state.elements.forEach(el=>{
+    drawElement(el)
+  })
 }
