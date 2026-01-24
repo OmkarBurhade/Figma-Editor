@@ -5,7 +5,7 @@ import { exportHTML, exportJSON, exportPNG } from "./export.js";
 import { initKeyBordMove } from "./keyboard.js";
 import { initSelection } from "./selection.js";
 import { loadDesignOnStart, saveDesign } from "./storage.js";
-
+document.addEventListener("contextmenu", e => e.preventDefault());
 const canvas = document.getElementById("canvas");
 document.getElementById('save-btn').onclick = saveDesign
 document.getElementById("export-json-btn").onclick = exportJSON;
