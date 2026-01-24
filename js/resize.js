@@ -71,8 +71,8 @@ function resizeMove(e) {
 
   const elData = state.elements.find((el) => el.id === currentEl.dataset.id);
   if (elData) {
-    elData.width = newW;
-    elData.height = newH;
+    elData.width = Number(newW.toFixed(2));;
+    elData.height = Number(newH.toFixed(2));;
   }
 }
 

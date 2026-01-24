@@ -5,6 +5,10 @@ import { moveLayer } from "./reorder.js";
 export function initKeyBordMove(canvas) {
   
   document.addEventListener("keydown", (e) => {
+
+     const tag = document.activeElement.tagName.toLowerCase();
+    if (tag === "input" || tag === "textarea") return;
+
     if (!state.selectedId) return;
 
      // delete key

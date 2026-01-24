@@ -13,7 +13,7 @@ export function initSelection(canvas) {
 export function attachSelectionToElement(div, id) {
   div.addEventListener("click", (e) => {
     // console.log("hello from div");
-    div.style.border = "1px solid #555555";
+    // div.style.border = "1px solid #555555";
     e.stopPropagation(); // direct canvas pr click nahi hota event elements tak nahi jate turant hi rook jate he jse ki canvas ke andar rectangle pr click kiya to event rectangle pr click krne pr hi chlega...
     selectElement(id);
   });

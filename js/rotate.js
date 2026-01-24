@@ -29,7 +29,7 @@ function startRotate(e) {
   centerY = rect.top + rect.height / 2;
 
   document.addEventListener("mousemove", rotateMove);
- document.addEventListener("mouseup", stopRotate);
+  document.addEventListener("mouseup", stopRotate);
 }
 
 function rotateMove(e) {
@@ -37,7 +37,8 @@ function rotateMove(e) {
   const dx = e.clientX - centerX;
   const dy = e.clientY - centerY;
 
-  const angle = Math.atan2(dy, dx) * (180 / Math.PI) + 90;
+  let angle = Math.atan2(dy, dx) * (180 / Math.PI) + 90;
+  angle = Number(angle.toFixed(0));
 
   currentEl.style.transform = `rotate(${angle}deg)`;
 

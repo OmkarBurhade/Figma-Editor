@@ -39,20 +39,26 @@
             <label for="prop-height">Height</label>
             <input type="number" id="prop-height" value="0" />
           </div>
+        </div>
+        <div class="row">
           <div class="prop-group">
             <label for="prop-rotation">Rotation</label>
             <input type="number" id="prop-rotation" value="0" />
           </div>
+          <div class="prop-group">
+            <label for="prop-color">Color</label>
+            <input type="color" id="prop-color" />
+          </div>
         </div>
-
-        <div class="prop-group">
-          <label for="prop-color">Color</label>
-          <input type="color" id="prop-color" />
-        </div>
-
         <div class="prop-group" id="text-prop-box" style="display: none">
           <label for="prop-text">Text</label>
           <input type="text" id="prop-text" />
+        </div>
+
+        <div class="export-wrap">
+          <button id="export-json-btn">Export JSON</button>
+          <button id="export-html-btn">Export HTML</button>
+          <button id="export-png-btn">Export PNG</button>
         </div>
       </div>
     </div>

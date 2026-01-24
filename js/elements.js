@@ -87,7 +87,7 @@ export function drawElement(el) {
     content.textContent = el.text;
     div.appendChild(content);
     div.style.background = el.bgColor;
-    div.style.border = "1px solid #555555";
+    // div.style.border = "1px solid #555555";
   }
 
   attachSelectionToElement(div, el.id);

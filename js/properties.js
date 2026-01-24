@@ -18,8 +18,8 @@ export function updatePropertiesPanel(el) {
   }
 
   // console.log(widthInput.value)
-  widthInput.value = elData.width; // input width ki value element me set krne ke liye
-  heightInput.value = elData.height;
+  widthInput.value = Number(elData.width).toFixed(2); // input width ki value element me set krne ke liye
+  heightInput.value =  Number(elData.height).toFixed(2);
   colorInput.value = elData.bgColor || "#00ff00"; // yaha pr ye extra color add kyu kiya he??
 
   if (elData.type === "text") {
@@ -31,7 +31,7 @@ export function updatePropertiesPanel(el) {
 
   // rotaion 
 
-  rotationInput.value = elData.rotation || 0
+  rotationInput.value = Number(elData.rotation || 0).toFixed(0);
 
 }
 
@@ -56,7 +56,7 @@ function updateSize(type) {
 
   const elData = state.elements.find((e) => e.id === state.selectedId);
 
-  elData[type] = Number(val); //exact width or height input se calculate krneke liye
+  elData[type] = Number(Number(val).toFixed(2)); //exact width or height input se calculate krneke liye
 }
 
 function updateColor() {
