@@ -23,7 +23,7 @@ body {
 }
 :root {
 }
-button{
+button {
   cursor: pointer;
 }
 .row {
@@ -204,7 +204,7 @@ h3 {
 }
 
 .layer-row.active {
-  border: 1px solid #c4c4c4;
+  border: 1px solid rgb(12, 201, 56);
 }
 
 .layer-row {
