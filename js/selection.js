@@ -24,7 +24,7 @@ export function attachSelectionToElement(div, id) {
     if (!div.classList.contains("element")) return;
 
     const elData = state.elements.find((x) => x.id === div.dataset.id);
-    if (!elData || elData.type !== "text") return;
+    if (!elData || elData.type !== "text" || elData.locked) return;
 
     enableTextEdit(div);
   });
