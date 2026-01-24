@@ -43,7 +43,7 @@ function createText() {
     x: 180,
     y: 180,
     width: 50,
-    height: 20,
+    height: 'fit-content',
     rotation: 0,
     bgColor: "transparent",
     text: "Add text",
