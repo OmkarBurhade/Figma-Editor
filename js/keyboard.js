@@ -7,7 +7,9 @@ export function initKeyBordMove(canvas) {
   document.addEventListener("keydown", (e) => {
 
      const tag = document.activeElement.tagName.toLowerCase();
-    if (tag === "input" || tag === "textarea") return;
+     console.log(tag);
+     
+    if (tag === "input" || tag === "textarea" || tag === "div") return;
 
     if (!state.selectedId) return;
 
