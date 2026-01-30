@@ -39,7 +39,7 @@ export function renderLayers() {
 
     item.addEventListener("dblclick", (e) => {
       e.stopPropagation();
-      console.log("hello");
+      // console.log("hello");
 
       clearTimeout(clickTimer); // pending select ko cancel krneke liye
 

@@ -3,22 +3,43 @@
   <head>
     <meta charset="UTF-8" />
     <title>Figma Clone – Web Based Design Tool</title>
-    <meta name="description" content="A web based Figma clone built using JavaScript. Create, move, resize, rotate elements, manage layers, use keyboard shortcuts and export design as JSON, HTML and PNG." />
-    <meta name="keywords" content="figma clone, design tool, web design editor, canvas editor, javascript project, ui builder, drag drop editor" />
+    <meta
+      name="description"
+      content="A web based Figma clone built using JavaScript. Create, move, resize, rotate elements, manage layers, use keyboard shortcuts and export design as JSON, HTML and PNG."
+    />
+    <meta
+      name="keywords"
+      content="figma clone, design tool, web design editor, canvas editor, javascript project, ui builder, drag drop editor"
+    />
     <meta name="author" content="Omkar Burhade" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <meta property="og:title" content="Figma Clone – Web Based Design Tool" />
-    <meta property="og:description" content="Design UI directly in browser with layers, properties panel, keyboard shortcuts and export options." />
+    <meta
+      property="og:description"
+      content="Design UI directly in browser with layers, properties panel, keyboard shortcuts and export options."
+    />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://omkarburhade.github.io/Figma-Editor/" />
-    <meta property="og:image" content="https://omkarburhade.github.io/Figma-Editor/favicon.ico" />
+    <meta
+      property="og:url"
+      content="https://omkarburhade.github.io/Figma-Editor/"
+    />
+    <meta
+      property="og:image"
+      content="https://omkarburhade.github.io/Figma-Editor/favicon.ico"
+    />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Figma Clone – Web Based Design Tool" />
-    <meta name="twitter:description" content="A lightweight Figma-like design editor built in pure JavaScript." />
-    <meta name="twitter:image" content="https://omkarburhade.github.io/Figma-Editor/favicon.ico" />
+    <meta
+      name="twitter:description"
+      content="A lightweight Figma-like design editor built in pure JavaScript."
+    />
+    <meta
+      name="twitter:image"
+      content="https://omkarburhade.github.io/Figma-Editor/favicon.ico"
+    />
 
     <link rel="stylesheet" href="css/style.css" />
   </head>
@@ -27,55 +48,72 @@
     <div id="toolbar">
       <button id="addRectBtn">Add Rectangle</button>
       <button id="addTextBtn">Add Text</button>
-    </div>
-    <div class="save-load-wraper">
-      <button id="save-btn">Save</button>
-      <!-- <button id="load-btn">Load</button> -->
+      <span></span>
+      <div class="save-load-wraper">
+        <button id="save-btn">Save</button>
+        <!-- <button id="load-btn">Load</button> -->
+      </div>
     </div>
     <!-- Main Editor -->
     <div id="editor">
-      <div id="layersPanel">
-        <h3>Layers</h3>
+      <div class="features">
+        <div id="layersPanel">
+          <h3>Layers</h3>
 
-        <div id="layers-list"></div>
+          <div id="layers-list"></div>
+        </div>
+
+        <div id="propertiesPanel">
+          <h3>Properties</h3>
+          <div class="row">
+            <div class="prop-group">
+              <label for="prop-width">Width</label>
+              <input type="number" id="prop-width" value="0" />
+            </div>
+
+            <div class="prop-group">
+              <label for="prop-height">Height</label>
+              <input type="number" id="prop-height" value="0" />
+            </div>
+          </div>
+          <div class="row">
+            <div class="prop-group">
+              <label for="prop-rotation">Rotation</label>
+              <input type="number" id="prop-rotation" value="0" />
+            </div>
+            <div class="prop-group">
+              <label for="prop-color">Color</label>
+              <input type="color" id="prop-color" />
+            </div>
+          </div>
+          <div class="prop-group" id="text-prop-box" style="display: none">
+            <label for="prop-text">Text</label>
+            <input type="text" id="prop-text" />
+          </div>
+
+          <div class="export-wrap">
+            <button id="export-json-btn">Export JSON</button>
+            <button id="export-html-btn">Export HTML</button>
+            <button id="export-png-btn">Export PNG</button>
+          </div>
+        </div>
       </div>
 
+      <!-- shortcuts keys -->
+      <div class="shortcut-panel" id="shortcutPanel">
+        <div class="shortcut-title">Shortcuts</div>
+        <ul>
+          <li><kbd>Ctrl</kbd> + <kbd>]</kbd> — Bring layer front</li>
+          <li><kbd>Ctrl</kbd> + <kbd>[</kbd> — Send layer back</li>
+          <!-- <li><kbd>Ctrl</kbd> + <kbd>D</kbd> — Duplicate</li> -->
+          <li><kbd>Del</kbd> — Delete</li>
+          <li><kbd>↑ ↓ ← →</kbd> — Move element</li>
+          <li><kbd>Double Click</kbd> — Edit text</li>
+          <li><kbd>Double Click Layer </kbd> — Edit layer name</li>
+          <li><kbd>?</kbd> — Toggle shortcut panel</li>
+        </ul>
+      </div>
       <div id="canvas"></div>
-
-      <div id="propertiesPanel">
-        <h3>Properties</h3>
-        <div class="row">
-          <div class="prop-group">
-            <label for="prop-width">Width</label>
-            <input type="number" id="prop-width" value="0" />
-          </div>
-
-          <div class="prop-group">
-            <label for="prop-height">Height</label>
-            <input type="number" id="prop-height" value="0" />
-          </div>
-        </div>
-        <div class="row">
-          <div class="prop-group">
-            <label for="prop-rotation">Rotation</label>
-            <input type="number" id="prop-rotation" value="0" />
-          </div>
-          <div class="prop-group">
-            <label for="prop-color">Color</label>
-            <input type="color" id="prop-color" />
-          </div>
-        </div>
-        <div class="prop-group" id="text-prop-box" style="display: none">
-          <label for="prop-text">Text</label>
-          <input type="text" id="prop-text" />
-        </div>
-
-        <div class="export-wrap">
-          <button id="export-json-btn">Export JSON</button>
-          <button id="export-html-btn">Export HTML</button>
-          <button id="export-png-btn">Export PNG</button>
-        </div>
-      </div>
     </div>
 
     <script type="module" src="js/main.js"></script>

@@ -56,7 +56,7 @@ function resizeMove(e) {
 
   let newW = startW;
   let newH = startH;
-  console.log(currentHandle.includes("r"));
+  // console.log(currentHandle.includes("r"));
 
   if (currentHandle.includes("r")) newW += dx;
   if (currentHandle.includes("l")) newW -= dx;

@@ -8,7 +8,7 @@ export function saveDesign() {
   try {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state.elements));
     alert("Design Saved ✅");
-    console.log("Saved to localStorage:", state.elements); // checking data store ho raha he ki nahi
+    // console.log("Saved to localStorage:", state.elements); // checking data store ho raha he ki nahi
   } catch (err) {
     console.error("save failed: ", err);
     alert("save failed");
@@ -78,7 +78,7 @@ function createDefaultDesign() {
       id: crypto.randomUUID(),
       type: "text",
       name: "Welcome",
-      x: 265,
+      x: 865,
       y: 435,
       width: 120,
       height: 30,

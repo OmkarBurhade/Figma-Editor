@@ -67,7 +67,7 @@ function updateColor() {
   // console.log(colorInput.value);
 
   const elData = state.elements.find((e) => e.id === state.selectedId);
-  console.log(elData);
+  // console.log(elData);
   elData.bgColor = colorInput.value;
 }
 
