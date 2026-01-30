@@ -3,12 +3,12 @@
 3) Elements ✅
 4) resize ✅
 5) Drage ✅
-6) Keyboard
-7) Layers
+6) Keyboard ✅
+7) Layers ✅
 8) Properties✅
 9) Rotate ✅
 10) Storage ✅
-11) Export
+11) Export ✅
 
 
 today's top priorety 
@@ -19,7 +19,7 @@ today's top priorety
 5) Page refresh pe auto load ✅
 6) Position, size, style, rotation, layer order restore ✅
 7) JSON export (layout data)
-8) HTML export (inline styles ke sath design recreate)
+8) HTML export (inline styles ke sath design recreate) ✅
 
 
  
